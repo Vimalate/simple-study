@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-28 17:08:36
- * @LastEditTime: 2020-05-28 19:29:44
+ * @LastEditTime: 2020-05-28 20:20:10
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vuepress-blog\docs\blog\VUE-Library\MVue.js
@@ -138,7 +138,7 @@ class MVue {
     this.$options = options
     if (this.$el) {
       // 1 实现一个数据观察者
-
+      new Observer(this.$data)
       // 2 实现一个指令解析器
       new Compile(this.$el, this)
     }
