@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-28 17:08:36
- * @LastEditTime: 2020-05-28 20:20:10
+ * @LastEditTime: 2020-05-28 21:56:30
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vuepress-blog\docs\blog\VUE-Library\MVue.js
@@ -12,30 +12,44 @@ const compileUtil = {
       return data[currentVal]
     }, vm.$data)
   },
+  getContentVal(expr,vm) {
+    return expr.replace(/\{\{(.+?)\}\}/g, (...args) => {
+      return this.getVal(args[1], vm)
+    })
+  },
   text(node, expr, vm) {
     let value
     if (expr.indexOf('{{') !== -1) {
-       value= expr.replace(/\{\{(.+?)\}\}/g, (...args) => {
+      value = expr.replace(/\{\{(.+?)\}\}/g, (...args) => {
+        new Watcher(vm, args[1], (newVal) => {
+          this.updater.textUpdater(node, this.getContentVal(expr, vm))
+        })
         return this.getVal(args[1], vm)
         console.log(args)
       })
-    }else{
+    } else {
       value = this.getVal(expr, vm)
     }
-    
+
     this.updater.textUpdater(node, value)
   },
   html(node, expr, vm) {
     const value = this.getVal(expr, vm)
+    new Watcher(vm, expr, (newVal) => {
+      this.updater.htmlUpdater(node, newVal)
+    })
     this.updater.htmlUpdater(node, value)
   },
   model(node, expr, vm) {
     const value = this.getVal(expr, vm)
+    new Watcher(vm, expr, (newVal) => {
+      this.updater.modelUpdater(node, newVal)
+    })
     this.updater.modelUpdater(node, value)
   },
   on(node, expr, vm, eventName) {
-    let fn=vm.$options.methods&&vm.$options.methods[expr];
-    node.addEventListener(eventName,fn.bind(vm),false)
+    let fn = vm.$options.methods && vm.$options.methods[expr];
+    node.addEventListener(eventName, fn.bind(vm), false)
   },
   // 更新函数
   updater: {
@@ -98,9 +112,9 @@ class Compile {
         compileUtil[dirName](node, value, this.vm, eventName)
         // 删除元素指令标签上的属性
         node.removeAttribute('v-' + directive)
-      }else if(this.isEventName(name)){//@click=''
-         let [,eventName]=name.split('@')
-         compileUtil['on'](node, value, this.vm, eventName)
+      } else if (this.isEventName(name)) { //@click=''
+        let [, eventName] = name.split('@')
+        compileUtil['on'](node, value, this.vm, eventName)
       }
     })
   }
@@ -111,7 +125,7 @@ class Compile {
       compileUtil['text'](node, content, this.vm)
     }
   }
-  isEventName(attrNmae){
+  isEventName(attrNmae) {
     return attrNmae.startsWith('@')
   }
   isDirective(attrNmae) {
