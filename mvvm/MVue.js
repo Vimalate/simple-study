@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-28 17:08:36
- * @LastEditTime: 2020-05-28 21:56:30
+ * @LastEditTime: 2020-05-28 22:23:30
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vuepress-blog\docs\blog\VUE-Library\MVue.js
@@ -10,6 +10,11 @@ const compileUtil = {
   getVal(expr, vm) {
     return expr.split('.').reduce((data, currentVal) => {
       return data[currentVal]
+    }, vm.$data)
+  },
+  setVal(expr,vm,inputVal){
+    return expr.split('.').reduce((data, currentVal) => {
+    return  data[currentVal]=inputVal
     }, vm.$data)
   },
   getContentVal(expr,vm) {
@@ -42,8 +47,14 @@ const compileUtil = {
   },
   model(node, expr, vm) {
     const value = this.getVal(expr, vm)
+    // 绑定更新函数，数据=>视图
     new Watcher(vm, expr, (newVal) => {
       this.updater.modelUpdater(node, newVal)
+    })
+    // 视图=>数据=>视图
+    node.addEventListener('input',e=>{
+      // 设置值
+      this.setVal(expr,vm,e.target.value)
     })
     this.updater.modelUpdater(node, value)
   },
@@ -155,7 +166,20 @@ class MVue {
       new Observer(this.$data)
       // 2 实现一个指令解析器
       new Compile(this.$el, this)
+      this.proxyData(this.$data)
     }
 
+  }
+  proxyData(data){
+    for(let key in data){
+      Object.defineProperty(this,key,{
+        get(){
+          return data[key]
+        },
+        set(newVal){
+          data[key]=newVal
+        }
+      })
+    }
   }
 }
