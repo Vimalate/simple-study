@@ -1,7 +1,7 @@
 /*
  * @Author: Vimalakirti
  * @Date: 2020-06-12 16:22:04
- * @LastEditTime: 2020-06-12 17:03:05
+ * @LastEditTime: 2020-06-12 17:49:59
  * @Description: 
  * @FilePath: \简单实现\typescript+vue\数据类型.ts
  */ 
@@ -57,3 +57,49 @@ function jump(city:string):void{
   console.log(`跳${city}`)
 }
 jump('p城')
+
+//函数可选参数 ？
+function buyGUn(gunName:string,count?:number):void{
+  console.log(`${gunName}是好货，送你${count}把`)
+}
+buyGUn('m416',3)
+
+//函数默认值
+function buyGUn2(gunName:string='m416',count:number=2):void{
+  console.log(`${gunName}是好货，送你${count}把`)
+}
+//都是默认值
+buyGUn2()//'m416',2
+//都是实参
+buyGUn2('M42',10)
+//只传前面
+buyGUn2('ak47')
+//只传后面
+buyGUn2(undefined,3)
+
+//函数 剩余参数
+function add(x:number,y:number,...restOfNum:number[]):void{
+  //创建求和变量
+  let sum:number=x+y
+  //累加
+  for(let v of restOfNum){
+    sum+=v
+  }
+  //打印结果
+  console.log('结果'+sum)
+}
+add(1,2)
+add(1,2,3,4,5,6)
+
+//类 calss
+class City{
+  cName:string;
+  cLevel:number;
+  constructor(name:string,level:number){
+    this.cName=name
+    this.cLevel=level
+  }
+  about(){
+    console.log(`欢迎来到${this.cName},此地危险系数为${this.cLevel}`)
+  }
+}

@@ -2,7 +2,7 @@
 /*
  * @Author: Vimalakirti
  * @Date: 2020-06-12 16:22:04
- * @LastEditTime: 2020-06-12 17:03:05
+ * @LastEditTime: 2020-06-12 17:49:59
  * @Description:
  * @FilePath: \简单实现\typescript+vue\数据类型.ts
  */
@@ -50,3 +50,51 @@ function jump(city) {
     console.log("\u8DF3" + city);
 }
 jump('p城');
+//函数可选参数 ？
+function buyGUn(gunName, count) {
+    console.log(gunName + "\u662F\u597D\u8D27\uFF0C\u9001\u4F60" + count + "\u628A");
+}
+buyGUn('m416', 3);
+//函数默认值
+function buyGUn2(gunName, count) {
+    if (gunName === void 0) { gunName = 'm416'; }
+    if (count === void 0) { count = 2; }
+    console.log(gunName + "\u662F\u597D\u8D27\uFF0C\u9001\u4F60" + count + "\u628A");
+}
+//都是默认值
+buyGUn2(); //'m416',2
+//都是实参
+buyGUn2('M42', 10);
+//只传前面
+buyGUn2('ak47');
+//只传后面
+buyGUn2(undefined, 3);
+//函数 剩余参数
+function add(x, y) {
+    var restOfNum = [];
+    for (var _i = 2; _i < arguments.length; _i++) {
+        restOfNum[_i - 2] = arguments[_i];
+    }
+    //创建求和变量
+    var sum = x + y;
+    //累加
+    for (var _a = 0, restOfNum_1 = restOfNum; _a < restOfNum_1.length; _a++) {
+        var v = restOfNum_1[_a];
+        sum += v;
+    }
+    //打印结果
+    console.log('结果' + sum);
+}
+add(1, 2);
+add(1, 2, 3, 4, 5, 6);
+//类 calss
+var City = /** @class */ (function () {
+    function City(name, level) {
+        this.cName = name;
+        this.cLevel = level;
+    }
+    City.prototype.about = function () {
+        console.log("\u6B22\u8FCE\u6765\u5230" + this.cName + ",\u6B64\u5730\u5371\u9669\u7CFB\u6570\u4E3A" + this.cLevel);
+    };
+    return City;
+}());
