@@ -2,7 +2,7 @@
 /*
  * @Author: Vimalakirti
  * @Date: 2020-06-12 16:22:04
- * @LastEditTime: 2020-06-12 17:49:59
+ * @LastEditTime: 2020-06-12 17:52:18
  * @Description:
  * @FilePath: \简单实现\typescript+vue\数据类型.ts
  */
@@ -98,3 +98,7 @@ var City = /** @class */ (function () {
     };
     return City;
 }());
+//创建对象
+var c1 = new City('p城', 5);
+console.log(c1.cName);
+c1.about();

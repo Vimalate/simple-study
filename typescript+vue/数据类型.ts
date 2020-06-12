@@ -1,7 +1,7 @@
 /*
  * @Author: Vimalakirti
  * @Date: 2020-06-12 16:22:04
- * @LastEditTime: 2020-06-12 17:49:59
+ * @LastEditTime: 2020-06-12 17:52:18
  * @Description: 
  * @FilePath: \简单实现\typescript+vue\数据类型.ts
  */ 
@@ -103,3 +103,7 @@ class City{
     console.log(`欢迎来到${this.cName},此地危险系数为${this.cLevel}`)
   }
 }
+//创建对象
+let c1=new City('p城',5)
+console.log(c1.cName)
+c1.about()
