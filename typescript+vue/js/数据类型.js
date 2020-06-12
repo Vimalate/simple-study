@@ -2,7 +2,7 @@
 /*
  * @Author: Vimalakirti
  * @Date: 2020-06-12 16:22:04
- * @LastEditTime: 2020-06-12 16:43:33
+ * @LastEditTime: 2020-06-12 17:03:05
  * @Description:
  * @FilePath: \简单实现\typescript+vue\数据类型.ts
  */
@@ -36,3 +36,17 @@ console.log(Gender2.Boy); //0
 console.log(Gender2.Girl); //1
 console.log(Gender2.Unknown); //2
 //2.使用枚举
+var userSex = Gender.Boy;
+console.log(userSex);
+//h函数 返回值 类型
+function sayHi() {
+    return 'hello world';
+}
+var res1 = sayHi();
+console.log(res1);
+//函数 形参 类型
+//无返回值 void
+function jump(city) {
+    console.log("\u8DF3" + city);
+}
+jump('p城');
