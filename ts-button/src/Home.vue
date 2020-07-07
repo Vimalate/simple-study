@@ -1,7 +1,7 @@
 <!--
  * @Author: Vimalakirti
  * @Date: 2020-07-07 14:29:59
- * @LastEditTime: 2020-07-07 14:56:02
+ * @LastEditTime: 2020-07-07 16:14:06
  * @Description: 
  * @FilePath: \简单实现\ts-button\src\Home.vue
 --> 
@@ -14,7 +14,7 @@
 --> 
 <template>
   <div class="home">
-    <UIButton @click='onClick'></UIButton>
+    <UIButton @click="onClick" large></UIButton>
   </div>
 </template>
 
