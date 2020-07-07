@@ -1,0 +1,22 @@
+typescript-vue/.DS_Store
+./typescript-vue/node_modules
+/dist
+typescript-vue/node_modules
+# local env files
+typescript-vue/.env.local
+typescript-vue/.env.*.local
+
+# Log files
+typescript-vue/npm-debug.log*
+typescript-vue/yarn-debug.log*
+typescript-vue/yarn-error.log*
+pnpm-debug.log*
+
+# Editor directories and files
+typescript-vue/.idea
+typescript-vue/.vscode
+typescript-vue/*.suo
+typescript-vue/*.ntvs*
+typescript-vue/*.njsproj
+typescript-vue/*.sln
+typescript-vue/*.sw?
