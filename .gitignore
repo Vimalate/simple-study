@@ -2,6 +2,11 @@ typescript-vue/.DS_Store
 ./typescript-vue/node_modules
 /dist
 typescript-vue/node_modules
+
+./jd-vue3/node_modules
+/dist
+jd-vue3/node_modules
+jd-vue3/dist
 # local env files
 typescript-vue/.env.local
 typescript-vue/.env.*.local
